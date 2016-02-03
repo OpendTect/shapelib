@@ -1,0 +1,31 @@
+#Build files
+CMakeFiles
+CMakeCache.txt
+CTestTestfile.cmake
+Testing
+cmake_install.cmake
+script.sed
+script.sh
+sed_scripted_makeshape.sh
+sed_scripted_stream1.sh
+sed_scripted_stream2.sh
+
+#Products
+dbfadd
+dbfcreate
+dbfdump
+libshp.*
+shpadd
+shpcreate
+shpdump
+shprewind
+shptest
+shptreedump
+shputils
+
+#Testfiles
+test*.sh?
+test.dbf
+
+#Common temporary files
+*.sw?

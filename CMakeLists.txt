@@ -28,6 +28,10 @@ message(STATUS "CMAKE_SYSTEM_NAME = ${CMAKE_SYSTEM_NAME}")
 # Version 2.8.5 or above of cmake is currently required for all platforms.
 cmake_minimum_required(VERSION 2.8.5 FATAL_ERROR)
 
+if ( POLICY CMP0026 )
+    cmake_policy(SET CMP0026 OLD)
+endif( POLICY CMP0026 )
+
 # libraries are all shared by default.
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 
