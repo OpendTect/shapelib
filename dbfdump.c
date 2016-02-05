@@ -177,7 +177,7 @@ int main( int argc, char ** argv )
 
 	eType = DBFGetFieldInfo( hDBF, i, szTitle, &nWidth, &nDecimals );
 	if( (int) strlen(szTitle) > nWidth )
-	    panWidth[i] = strlen(szTitle);
+	    panWidth[i] = (int)strlen(szTitle);
 	else
 	    panWidth[i] = nWidth;
 

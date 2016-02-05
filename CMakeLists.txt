@@ -48,6 +48,12 @@ if(BUILD_SHARED_LIBS AND WIN32 AND NOT CYGWIN)
   set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/dll)
 endif(BUILD_SHARED_LIBS AND WIN32 AND NOT CYGWIN)
 
+# Disable warnings on various platforms
+if ( WIN32 )
+    add_definitions( "/wd4996") #Disable warning about old strlen functions
+    add_definitions( "/wd4018") #Disable warning about signed/unsigned mismatch in comparisonss
+endif( WIN32 )
+
 set(PACKAGE shp)
 
 # Set up install locations.

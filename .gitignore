@@ -10,8 +10,15 @@ sed_scripted_makeshape.sh
 sed_scripted_stream1.sh
 sed_scripted_stream2.sh
 
+#Windows build files
+*.dir
+*vcxproj*
+Debug
+Release
+
 #Products
-dbfadd
+shapelib.*
+dbfadd.*
 dbfcreate
 dbfdump
 libshp.*
