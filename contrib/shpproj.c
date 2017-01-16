@@ -32,7 +32,7 @@
  *
  * SHPGeo must be compiled with -DPROJ4 support
  *
- * $Log$
+ * $Log: shpproj.c,v $
  * Revision 1.10  2011-07-24 03:17:46  fwarmerdam
  * include string.h and stdlib.h where needed in contrib (#2146)
  *

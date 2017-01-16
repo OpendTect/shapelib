@@ -3,7 +3,7 @@
  *
  * This code is in the public domain.
  *
- * $Log$
+ * $Log: dbfcat.c,v $
  * Revision 1.2  2011-07-24 03:17:46  fwarmerdam
  * include string.h and stdlib.h where needed in contrib (#2146)
  *
@@ -19,7 +19,7 @@
  */
 
 static char rcsid[] = 
-  "$Id$";
+  "$Id: dbfcat.c,v 1.2 2011-07-24 03:17:46 fwarmerdam Exp $";
 
 #include <stdlib.h>
 #include <string.h>

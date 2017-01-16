@@ -36,3 +36,7 @@ test.dbf
 
 #Common temporary files
 *.sw?
+
+#Version control
+CVS
+.cvsignore

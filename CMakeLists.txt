@@ -28,10 +28,6 @@ message(STATUS "CMAKE_SYSTEM_NAME = ${CMAKE_SYSTEM_NAME}")
 # Version 2.8.5 or above of cmake is currently required for all platforms.
 cmake_minimum_required(VERSION 2.8.5 FATAL_ERROR)
 
-if ( POLICY CMP0026 )
-    cmake_policy(SET CMP0026 OLD)
-endif( POLICY CMP0026 )
-
 # libraries are all shared by default.
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 
@@ -47,12 +43,6 @@ endif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
 if(BUILD_SHARED_LIBS AND WIN32 AND NOT CYGWIN)
   set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR}/dll)
 endif(BUILD_SHARED_LIBS AND WIN32 AND NOT CYGWIN)
-
-# Disable warnings on various platforms
-if ( WIN32 )
-    add_definitions( "/wd4996") #Disable warning about old strlen functions
-    add_definitions( "/wd4018") #Disable warning about signed/unsigned mismatch in comparisonss
-endif( WIN32 )
 
 set(PACKAGE shp)
 
@@ -93,8 +83,8 @@ set(lib_SRC
   dbfopen.c
   safileio.c
   shptree.c
+  sbnsearch.c
   )
-
 option(SHP_DROP_UNABLE_TO_OPEN_MSG "Drop \"unable to open\" error messages" ON)
 if(SHP_DROP_UNABLE_TO_OPEN_MSG)
   #define the SHP_DROP_UNABLE_TO_OPEN_MSG C macro for this source file.
@@ -113,8 +103,15 @@ if(WIN32 AND NOT CYGWIN)
     )
 endif(WIN32 AND NOT CYGWIN)
 
+if(UNIX)
+    find_library(M_LIB m)
+    if(M_LIB)
+      TARGET_LINK_LIBRARIES(shp -lm)
+    endif()
+endif(UNIX)
+
 set(shp_SOVERSION 1)
-set(shp_VERSION ${shp_SOVERSION}.0.1)
+set(shp_VERSION 1.4.0)
 set_target_properties(shp
   PROPERTIES 
   SOVERSION ${shp_SOVERSION}
@@ -206,35 +203,35 @@ if(BUILD_TEST)
   file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/script.sh "${SED_EXECUTABLE} -f script.sed < $1 >| $2")
   execute_process(
     COMMAND
-    ${BASH_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/script.sh ${CMAKE_CURRENT_SOURCE_DIR}/stream1.sh ${CMAKE_CURRENT_BINARY_DIR}/sed_scripted_stream1.sh
+    ${BASH_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/script.sh ${CMAKE_CURRENT_SOURCE_DIR}/tests/test1.sh ${CMAKE_CURRENT_BINARY_DIR}/sed_scripted_test1.sh
     )
 
   execute_process(
     COMMAND
-    ${BASH_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/script.sh ${CMAKE_CURRENT_SOURCE_DIR}/stream2.sh ${CMAKE_CURRENT_BINARY_DIR}/sed_scripted_stream2.sh
+    ${BASH_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/script.sh ${CMAKE_CURRENT_SOURCE_DIR}/tests/test2.sh ${CMAKE_CURRENT_BINARY_DIR}/sed_scripted_test2.sh
     )
 
   execute_process(
     COMMAND
-    ${BASH_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/script.sh ${CMAKE_CURRENT_SOURCE_DIR}/makeshape.sh ${CMAKE_CURRENT_BINARY_DIR}/sed_scripted_makeshape.sh
+    ${BASH_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/script.sh ${CMAKE_CURRENT_SOURCE_DIR}/tests/test3.sh ${CMAKE_CURRENT_BINARY_DIR}/sed_scripted_test3.sh
     )
 
   if(EG_DATA)
-    # These tests correspond to everything in stream1.sh
+    # These tests correspond to everything in test1.sh
     add_test(
-      NAME stream1
-      COMMAND ${BASH_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/sed_scripted_stream1.sh
+      NAME test1
+      COMMAND ${BASH_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/sed_scripted_test1.sh
       )
   endif(EG_DATA)
-  # These tests correspond to everything in stream1.sh
+  # These tests correspond to everything in test2.sh
   add_test(
-    NAME stream2
-    COMMAND ${BASH_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/sed_scripted_stream2.sh
+    NAME test2
+    COMMAND ${BASH_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/sed_scripted_test2.sh
     )
 
-  # These tests correspond to everything in makeshape.sh
+  # These tests correspond to everything in test3.sh
   add_test(
-    NAME makeshape
-    COMMAND ${BASH_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/sed_scripted_makeshape.sh
+    NAME test3
+    COMMAND ${BASH_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/sed_scripted_test3.sh
     )
 endif(BUILD_TEST)

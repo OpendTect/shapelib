@@ -26,7 +26,7 @@
  * Rewrite a shapefile sorted by a field or by the geometry.  For polygons,
  * sort by area, for lines sort by length and do nothing for all others.
  *
- * $Log$
+ * $Log: shpsort.c,v $
  * Revision 1.3  2004-07-06 21:23:17  fwarmerdam
  * minor const warning fix
  *

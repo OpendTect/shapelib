@@ -1,5 +1,5 @@
 /******************************************************************************
- * $Id$
+ * $Id: dbfdump.c,v 1.14 2016-12-05 12:44:05 erouault Exp $
  *
  * Project:  Shapelib
  * Purpose:  Sample application for dumping .dbf files to the terminal.
@@ -9,7 +9,7 @@
  * Copyright (c) 1999, Frank Warmerdam
  *
  * This software is available under the following "MIT Style" license,
- * or at the option of the licensee under the LGPL (see LICENSE.LGPL).  This
+ * or at the option of the licensee under the LGPL (see COPYING).  This
  * option is discussed in more detail in shapelib.html.
  *
  * --
@@ -33,7 +33,12 @@
  * DEALINGS IN THE SOFTWARE.
  ******************************************************************************
  *
- * $Log$
+ * $Log: dbfdump.c,v $
+ * Revision 1.14  2016-12-05 12:44:05  erouault
+ * * Major overhaul of Makefile build system to use autoconf/automake.
+ *
+ * * Warning fixes in contrib/
+ *
  * Revision 1.13  2013-11-26 21:52:33  fwarmerdam
  * report deleted rows in dbfdump
  *
@@ -76,7 +81,7 @@
 #include <string.h>
 #include "shapefil.h"
 
-SHP_CVSID("$Id$")
+SHP_CVSID("$Id: dbfdump.c,v 1.14 2016-12-05 12:44:05 erouault Exp $")
 
 int main( int argc, char ** argv )
 
@@ -177,7 +182,7 @@ int main( int argc, char ** argv )
 
 	eType = DBFGetFieldInfo( hDBF, i, szTitle, &nWidth, &nDecimals );
 	if( (int) strlen(szTitle) > nWidth )
-	    panWidth[i] = (int)strlen(szTitle);
+	    panWidth[i] = strlen(szTitle);
 	else
 	    panWidth[i] = nWidth;
 

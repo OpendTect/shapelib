@@ -27,7 +27,7 @@
  * 			specifically undo compound objects but not complex ones
  *
  *
- * $Log$
+ * $Log: shpcentrd.c,v $
  * Revision 1.3  2011-07-24 03:17:46  fwarmerdam
  * include string.h and stdlib.h where needed in contrib (#2146)
  *
