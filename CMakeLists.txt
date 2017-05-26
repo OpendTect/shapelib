@@ -30,6 +30,7 @@ cmake_minimum_required(VERSION 2.8.5 FATAL_ERROR)
 
 # libraries are all shared by default.
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
+cmake_policy( SET CMP0026 OLD )
 
 # Use rpath?
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
@@ -162,7 +163,7 @@ if(BUILD_TEST)
     file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/script.sed "s?/u/www/projects/shapelib/eg_data?${EG_DATA}?\n")
   else(EG_DATA)
     file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/script.sed "")
-    message(STATUS "WARNING: EG_DATA:PATH not set to point to downloaded eg_data directory so the eg_data part of testing will be ignored.")
+    #message(STATUS "WARNING: EG_DATA:PATH not set to point to downloaded eg_data directory so the eg_data part of testing will be ignored.")
   endif(EG_DATA)
 endif(BUILD_TEST)
 
