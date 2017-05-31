@@ -29,8 +29,11 @@ project(shapelib C)
 cmake_minimum_required(VERSION 2.8.5 FATAL_ERROR)
 
 # libraries are all shared by default.
-option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 cmake_policy( SET CMP0026 OLD )
+option(BUILD_SHARED_LIBS "Build shared libraries" ON)
+if ( WIN32 )
+    set(BUILD_SHARED_LIBS OFF)
+endif()
 
 # Use rpath?
 if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
