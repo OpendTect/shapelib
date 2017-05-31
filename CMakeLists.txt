@@ -79,6 +79,7 @@ set(
 # shapelib software.  Only one of these signatures is required
 # for the export_shp name.
 install(EXPORT export_shp DESTINATION ${CMAKE_INSTALL_SHP_DATADIR})
+message( "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}" )
 
 # Initial boilerplate done, now build library and executables.
 
@@ -190,6 +191,8 @@ endforeach(executable ${executables})
 # Install header
 install(FILES shapefil.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
+message( "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}" )
+message( "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}" )
 if(BUILD_TEST)
   # Set up tests:
 
