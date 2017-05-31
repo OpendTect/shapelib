@@ -193,6 +193,11 @@ install(FILES shapefil.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 
 message( "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}" )
 message( "CMAKE_INSTALL_PREFIX: ${CMAKE_INSTALL_PREFIX}" )
+
+get_cmake_property(_variableNames VARIABLES)
+foreach (_variableName ${_variableNames})
+    message(STATUS "${_variableName}=${${_variableName}}")
+endforeach()
 if(BUILD_TEST)
   # Set up tests:
 
