@@ -24,6 +24,8 @@ project(shapelib C)
 
 message(STATUS "CMake version = ${CMAKE_VERSION}")
 message(STATUS "CMAKE_SYSTEM_NAME = ${CMAKE_SYSTEM_NAME}")
+message("CMAKE_SOURCE_DIR : ${CMAKE_SOURCE_DIR}" )
+message("CMAKE_BINARY_DIR : ${CMAKE_BINARY_DIR}" )
 
 # Version 2.8.5 or above of cmake is currently required for all platforms.
 cmake_minimum_required(VERSION 2.8.5 FATAL_ERROR)
