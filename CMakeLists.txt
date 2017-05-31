@@ -155,6 +155,7 @@ else(BASH_EXECUTABLE AND SED_EXECUTABLE)
 endif(BASH_EXECUTABLE AND SED_EXECUTABLE)
 
 set(BUILD_TEST OFF)
+set(BUILD_EXECUTABLES OFF)
 # For the first series of tests, the user needs to have downloaded
 # from http://dl.maptools.org/dl/shapelib/shape_eg_data.zip, unpacked
 # that file, and specified the location of that directory with
@@ -168,21 +169,23 @@ if(BUILD_TEST)
   endif(EG_DATA)
 endif(BUILD_TEST)
 
-foreach(executable ${executables})
-  add_executable(${executable} ${executable}.c)
-  target_link_libraries(${executable} shp)
-  if(USE_RPATH)
-    set_target_properties(${executable}
-      PROPERTIES
-      INSTALL_RPATH "${CMAKE_INSTALL_LIBDIR}"
-      )
-  endif(USE_RPATH)
-  if(BUILD_TEST)
-    get_target_property(${executable}_LOC ${executable} LOCATION)
-    file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/script.sed "s?\\./${executable}?${${executable}_LOC}?\n")
-  endif(BUILD_TEST)
-  install(TARGETS ${executable} DESTINATION ${CMAKE_INSTALL_BINDIR})
-endforeach(executable ${executables})
+if ( BUILD_EXECUTABLES )
+    foreach(executable ${executables})
+      add_executable(${executable} ${executable}.c)
+      target_link_libraries(${executable} shp)
+      if(USE_RPATH)
+	set_target_properties(${executable}
+	  PROPERTIES
+	  INSTALL_RPATH "${CMAKE_INSTALL_LIBDIR}"
+	  )
+      endif(USE_RPATH)
+      if(BUILD_TEST)
+	get_target_property(${executable}_LOC ${executable} LOCATION)
+	file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/script.sed "s?\\./${executable}?${${executable}_LOC}?\n")
+      endif(BUILD_TEST)
+      install(TARGETS ${executable} DESTINATION ${CMAKE_INSTALL_BINDIR})
+    endforeach(executable ${executables})
+endif(BUILD_EXECUTABLES)
 
 # Install header
 install(FILES shapefil.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
