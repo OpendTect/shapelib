@@ -1,0 +1,2 @@
+set(shp_SOVERSION @shp_SOVERSION@)
+set(shp_VERSION @shp_VERSION@)

@@ -114,6 +114,7 @@ endif(UNIX)
 
 set(shp_SOVERSION 1)
 set(shp_VERSION 1.4.0)
+configure_file( FindShapeLibVersion.cmake.in FindShapeLibVersion.cmake)
 set_target_properties(shp
   PROPERTIES 
   SOVERSION ${shp_SOVERSION}
