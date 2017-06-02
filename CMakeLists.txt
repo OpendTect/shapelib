@@ -50,20 +50,17 @@ set(PACKAGE shp)
 set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_BINARY_DIR})
 # Set up install locations.
 set(
-  CMAKE_INSTALL_BINDIR
-  ${CMAKE_INSTALL_PREFIX}/bin
+  CMAKE_INSTALL_BINDIR bin
   CACHE PATH "install location for user executables"
   )
 
 set(
-  CMAKE_INSTALL_LIBDIR
-  ${CMAKE_INSTALL_PREFIX}/lib
+  CMAKE_INSTALL_LIBDIR lib
   CACHE PATH "install location for object code libraries"
   )
 
 set(
-  CMAKE_INSTALL_INCLUDEDIR
-  ${CMAKE_INSTALL_PREFIX}/include
+  CMAKE_INSTALL_INCLUDEDIR include
   CACHE PATH "install location for C header files"
   )
 
