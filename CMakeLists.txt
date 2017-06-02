@@ -68,8 +68,7 @@ set(
   )
 
 set(
-  CMAKE_INSTALL_SHP_DATADIR
-  ${CMAKE_INSTALL_PREFIX}/share/${PACKAGE}
+  CMAKE_INSTALL_SHP_DATADIR share/${PACKAGE}
   CACHE PATH "install location for read-only architecture-independent shp data"
   )
 
