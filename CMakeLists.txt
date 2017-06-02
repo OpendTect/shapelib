@@ -146,7 +146,7 @@ find_program(BASH_EXECUTABLE bash)
 find_program(SED_EXECUTABLE sed)
 if(BASH_EXECUTABLE AND SED_EXECUTABLE)
   set(BUILD_TEST ON)
-else(BASH_EXECUTABLE AND SED_EXECUTABLE)
+elseif ( NOT WIN32 )
   message(STATUS "WARNING: sed or bash not available so disabling testing")
 endif(BASH_EXECUTABLE AND SED_EXECUTABLE)
 
