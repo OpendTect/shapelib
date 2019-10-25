@@ -29,7 +29,6 @@ project(shapelib C)
 cmake_minimum_required(VERSION 2.8.5 FATAL_ERROR)
 
 # libraries are all shared by default.
-cmake_policy( SET CMP0026 OLD )
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 if ( WIN32 )
     set(BUILD_SHARED_LIBS OFF)
@@ -166,6 +165,7 @@ if(BUILD_TEST)
 endif(BUILD_TEST)
 
 if ( BUILD_EXECUTABLES )
+    cmake_policy( SET CMP0026 OLD )
     foreach(executable ${executables})
       add_executable(${executable} ${executable}.c)
       target_link_libraries(${executable} shp)
@@ -191,11 +191,13 @@ if(BUILD_TEST)
 
   enable_testing()
 
+  cmake_policy( SET CMP0026 OLD )
   # Other executables to be built to facilitate tests.
   foreach(executable shptest shputils)
     add_executable(${executable} ${executable}.c)
     target_link_libraries(${executable} shp)
     get_target_property(${executable}_LOC ${executable} LOCATION)
+    message( STATUS "Location? ${} ${executable} ${executable}_LOC" )
     file(APPEND ${CMAKE_CURRENT_BINARY_DIR}/script.sed "s?\\./${executable}?${${executable}_LOC}?\n")
   endforeach(executable shptest shputils)
 
