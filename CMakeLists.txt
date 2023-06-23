@@ -26,7 +26,10 @@ project(shapelib C)
 #message(STATUS "CMAKE_SYSTEM_NAME = ${CMAKE_SYSTEM_NAME}")
 
 # Version 2.8.5 or above of cmake is currently required for all platforms.
-cmake_minimum_required(VERSION 2.8.5 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.21.0 FATAL_ERROR)
+
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD_REQUIRED True)
 
 # libraries are all shared by default.
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
@@ -46,7 +49,6 @@ endif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
 set(LIBRARY_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR})
 
 set(PACKAGE shp)
-set(CMAKE_INSTALL_PREFIX ${CMAKE_CURRENT_BINARY_DIR})
 # Set up install locations.
 set(
   CMAKE_INSTALL_BINDIR bin
